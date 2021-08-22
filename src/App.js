@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import "./App.css";
 import Home from "./components/Home";
@@ -8,6 +9,11 @@ import Nav from "./components/Nav";
 import NewQuestion from "./components/NewQuestion";
 
 function App() {
+
+  const state = useSelector((state) => state);
+
+  console.log(state)
+
   return (
     <Router>
       <Fragment>

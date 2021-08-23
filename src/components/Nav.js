@@ -22,6 +22,9 @@ const Nav = () => {
             </NavLink>
           </li>
           <li>
+              Hello -authedUser PLACEHOLDER- -avatar PLACEHOLDER-
+          </li>
+          <li>
             <NavLink to="/login" activeClassName="active">
               Logout
             </NavLink>

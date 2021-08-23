@@ -3,12 +3,13 @@ import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { handleInitialData } from "./actions/shared";
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./components/Home";
 import Leaderboard from "./components/Leaderboard";
 import Login from "./components/Login";
-import Nav from "./components/Nav";
 import NewQuestion from "./components/NewQuestion";
 import LoadingBar from "react-redux-loading";
+import Header from "./components/Header";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,30 +20,39 @@ function App() {
 
   const authedUser = useSelector(
     (state) => ({
-      loading: state.authedUser === null,
+      authUserSet: state.authedUser === null,
     }),
     shallowEqual
   );
 
-  const state = useSelector((state) => state)
-
-  console.log('TESTING: ', state.authedUser);
+  console.log(authedUser.authUserSet)
 
   return (
     <Router>
       <Fragment>
-        <LoadingBar />
-        <div>
-          {authedUser.loading === true ? null : (
-            <div>
-              <Nav />
-              <Route path="/" exact component={Home} />
-              <Route path="/add" component={NewQuestion} />
-              <Route path="/leaderboard" component={Leaderboard} />
-              <Route path="/login" component={Login} />
-            </div>
-          )}
-        </div>
+        {authedUser.authUserSet ? (
+          <Route render={() => <Login />} />
+        ) : (
+          <Fragment>
+            <LoadingBar
+              style={{
+                backgroundColor: "green",
+                height: "5px",
+                position: "fixed",
+                top: "0",
+              }}
+            />
+
+            {authedUser.authUserSet === true ? null : (
+              <div>
+                <Header />
+                <Route path="/" exact component={Home} />
+                <Route path="/add" component={NewQuestion} />
+                <Route path="/leaderboard" component={Leaderboard} />
+              </div>
+            )}
+          </Fragment>
+        )}
       </Fragment>
     </Router>
   );

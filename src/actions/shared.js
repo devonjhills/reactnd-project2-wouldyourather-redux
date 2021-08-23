@@ -5,9 +5,9 @@ import { receiveUsers } from './users';
 import { showLoading, hideLoading } from 'react-redux-loading';
 
 /**
- * Set default ID to johndoe
+ * Start "logged out"
  */
-const AUTHED_ID = 'johndoe';
+const AUTHED_ID = null;
 
 export function handleInitialData() {
   return (dispatch) => {

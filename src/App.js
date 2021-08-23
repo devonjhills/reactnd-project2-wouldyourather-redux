@@ -1,6 +1,7 @@
-import React, { Fragment } from "react";
-import { useSelector } from "react-redux";
+import React, { Fragment, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { handleInitialData } from "./actions/shared";
 import "./App.css";
 import Home from "./components/Home";
 import Leaderboard from "./components/Leaderboard";
@@ -9,10 +10,13 @@ import Nav from "./components/Nav";
 import NewQuestion from "./components/NewQuestion";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(handleInitialData());
+  }, [dispatch])
 
   const state = useSelector((state) => state);
-
-  console.log(state)
 
   return (
     <Router>

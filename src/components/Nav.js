@@ -1,7 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 const Nav = () => {
+
+  const users = useSelector((state) => state.users);
+  const authedUser = useSelector((state) => state.authedUser);
+
   return (
     <div>
       <nav className="nav">
@@ -22,7 +27,8 @@ const Nav = () => {
             </NavLink>
           </li>
           <li>
-              Hello -authedUser PLACEHOLDER- -avatar PLACEHOLDER-
+              Hello {users[authedUser].name} 
+              <img src={users[authedUser].avatarURL} alt='User Avatar' />
           </li>
           <li>
             <NavLink to="/login" activeClassName="active">

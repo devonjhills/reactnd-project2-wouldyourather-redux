@@ -52,6 +52,6 @@ export function saveQuestion(question) {
 
       ........
 */
-export function saveQuestionAnswer(authUser, qid, answer) {
-    return _saveQuestionAnswer({ authUser, qid, answer });
+export function saveQuestionAnswer(answerInfo) {
+    return _saveQuestionAnswer(answerInfo);
 }

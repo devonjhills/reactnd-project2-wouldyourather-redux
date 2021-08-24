@@ -19,14 +19,12 @@ const addQuestion = (question) => {
   };
 };
 
-const addAnswer = ({ qid, answer, authedUser }) => {
+const addAnswer = (authedUser, qid, answer) => {
   return {
     type: ADD_ANSWER,
-    answerInfo: {
-      qid,
-      answer,
-      authedUser,
-    },
+    authedUser,
+    qid,
+    answer,
   };
 };
 
@@ -44,22 +42,13 @@ export function handleSaveQuestion(optionOne, optionTwo) {
   };
 }
 
-export function handleSaveQuestionAnswer(qid, answer) {
-  return async (dispatch, getState) => {
-    const { authedUser } = getState();
+export function handleSaveQuestionAnswer(authedUser, qid, answer) {
+  console.log("handleSaveQuestionAnswer", authedUser, qid, answer);
+  return async (dispatch) => {
     dispatch(showLoading());
-    await saveQuestionAnswer({
-      qid,
-      answer,
-      authedUser,
-    });
-    dispatch(
-      addAnswer({
-        qid,
-        answer,
-        authedUser,
-      })
-    );
+
+    await saveQuestionAnswer({ authedUser, qid, answer });
+    dispatch(addAnswer(authedUser, qid, answer));
     return dispatch(hideLoading());
   };
 }

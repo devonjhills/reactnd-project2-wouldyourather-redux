@@ -1,19 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Card, Form } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { handleSaveQuestionAnswer } from "../actions/questions";
 
 const Poll = (props) => {
   const questions = useSelector((state) => state.questions);
   const users = useSelector((state) => state.users);
+  const authedUser = useSelector((state) => state.authedUser);
+
+  const [selectedOption, setSelectedOption] = useState("");
 
   const urlId = useParams();
+
+  const dispatch = useDispatch();
 
   const question = questions[urlId.id];
   const user = users[question.author];
 
-  const handleClick = (e) => {
-    e.preventDefault();
+  const disableSubmit = selectedOption === "" ? true : false;
+
+  const onFormSubmit = (event) => {
+    event.preventDefault();
+    let authed = authedUser;
+    dispatch(handleSaveQuestionAnswer(authed, question.id, selectedOption));
+  };
+
+  const onFormChange = (event) => {
+    setSelectedOption(event.target.value);
   };
 
   return (
@@ -38,29 +52,35 @@ const Poll = (props) => {
             <Card.Title style={{ textAlign: "left" }}>
               Would you rather ...
             </Card.Title>
-            <Form>
+            <Form onChange={onFormChange} onSubmit={onFormSubmit}>
               <Form.Group className="mb-3" style={{ textAlign: "left" }}>
                 <Form.Check
                   type="radio"
                   label={question.optionOne.text}
                   id="formRadios1"
                   name="formRadios"
+                  value="optionOne"
                 />
                 <Form.Check
                   type="radio"
                   label={question.optionTwo.text}
                   id="formRadios2"
                   name="formRadios"
+                  value="optionTwo"
                 />
               </Form.Group>
+              <Card.Footer>
+                <div className="d-grid gap-2">
+                  <Button
+                    type="submit"
+                    variant="success"
+                    disabled={disableSubmit}
+                  >
+                    Submit
+                  </Button>
+                </div>
+              </Card.Footer>
             </Form>
-            <Card.Footer>
-              <div className="d-grid gap-2">
-                <Button onClick={handleClick} variant="success">
-                  Submit
-                </Button>
-              </div>
-            </Card.Footer>
           </Card.Body>
         </div>
       </Card>

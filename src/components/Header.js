@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { setAuthedUser } from "../actions/authedUser";
 
 const Header = () => {
@@ -9,8 +9,10 @@ const Header = () => {
   const authedUser = useSelector((state) => state.authedUser);
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleLogout = () => {
+    history.push("")
     dispatch(setAuthedUser(null));
   };
 

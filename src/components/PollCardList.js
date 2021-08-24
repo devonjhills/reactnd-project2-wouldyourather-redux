@@ -28,7 +28,9 @@ const PollCardList = (props) => {
     >
       <Card border-variant="dark" bg-variant="dark" text="dark" border="dark">
         <Card.Header style={{ textAlign: "left" }}>
-          <Card.Title>{author.name} asks:</Card.Title>
+          <Card.Title>
+          {author.name} {props.answered ? "asked:" : "asks:"}
+          </Card.Title>
         </Card.Header>
         <div className="card-horizontal">
           <Card.Img

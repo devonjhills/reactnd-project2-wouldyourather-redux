@@ -3,3 +3,26 @@ body,
 .root {
   padding-top: 50px;
 }
+
+.card-horizontal {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style-type: none;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.userimg {
+  border-radius:50%;
+  width: 35px;
+  height: 35px;
+  margin-right: 15px;
+  margin-left: 5px;
+}

@@ -1,11 +1,55 @@
-import React from 'react'
+import React from "react";
+import { Tabs, Tab } from "react-bootstrap";
+import { useSelector, shallowEqual } from "react-redux";
+import PollCardList from "./PollCardList";
 
 const Home = () => {
-    return (
-        <div>
-            Home Page
-        </div>
-    )
-}
+  const authedUserAnswers = useSelector(
+    (state) => ({
+      ids: Object.keys(state.users[state.authedUser].answers),
+    }),
+    shallowEqual
+  );
 
-export default Home
+  const polls = useSelector(
+    (state) => ({
+      answered: Object.values(state.questions)
+        .filter((poll) => authedUserAnswers.ids.includes(poll.id))
+        .sort((a, b) => b.timestamp - a.timestamp),
+      unanswered: Object.values(state.questions)
+        .filter((poll) => !authedUserAnswers.ids.includes(poll.id))
+        .sort((a, b) => b.timestamp - a.timestamp),
+    }),
+    shallowEqual
+  );
+
+  //console.log(polls.answered);
+  //console.log(polls.unanswered);
+  console.log("rendering home");
+
+  return (
+    <div className='text-center'>
+    <Tabs
+      fill
+      variant="tabs"
+      defaultActiveKey="unanswered"
+      id="tabs"
+      className="mb-3"
+      style={{ margin: "auto", width: "40%" }}
+    >
+      <Tab eventKey="unanswered" title="Unanswered">
+      {polls.unanswered.map(poll => (
+            <PollCardList id={poll.id} key={poll.id} />
+          ))}
+      </Tab>
+      <Tab className="text-center" eventKey="answered" title="Answered">
+      {polls.answered.map(poll => (
+            <PollCardList id={poll.id} key={poll.id} />
+          ))}
+      </Tab>
+    </Tabs>
+    </div>
+  );
+};
+
+export default Home;

@@ -28,6 +28,8 @@ const Login = () => {
 
   const disableSubmit = (selectedUser === "" ? true : false);
 
+  console.log('rendering login');
+
   return (
     <Card
       className="text-center"

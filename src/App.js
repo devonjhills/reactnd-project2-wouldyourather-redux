@@ -25,8 +25,6 @@ function App() {
     shallowEqual
   );
 
-  console.log(authedUser.authUserSet)
-
   return (
     <Router>
       <Fragment>
@@ -46,7 +44,7 @@ function App() {
             {authedUser.authUserSet === true ? null : (
               <div>
                 <Header />
-                <Route path="/" exact component={Home} />
+                <Route exact path="/" component={Home} />
                 <Route path="/add" component={NewQuestion} />
                 <Route path="/leaderboard" component={Leaderboard} />
               </div>

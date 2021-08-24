@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 const PollCardList = (props) => {
   const questions = useSelector((state) => state.questions);
@@ -8,6 +9,17 @@ const PollCardList = (props) => {
 
   const pollId = questions[props.id];
   const author = users[pollId.author];
+
+  const [redirect, setRedirect] = useState(false);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    setRedirect(true);
+  };
+
+  if (redirect === true) {
+    return <Redirect push to={`/questions/${props.id}`} />;
+  }
 
   return (
     <div
@@ -48,7 +60,15 @@ const PollCardList = (props) => {
             </Card.Text>
             <Card.Footer>
               <div className="d-grid gap-2">
-                <Button variant="success">View Poll</Button>
+                {props.answered ? (
+                  <Button onClick={handleClick} variant="outline-info">
+                    View Results
+                  </Button>
+                ) : (
+                  <Button onClick={handleClick} variant="outline-success">
+                    View Poll
+                  </Button>
+                )}
               </div>
             </Card.Footer>
           </Card.Body>

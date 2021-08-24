@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import NewQuestion from "./components/NewQuestion";
 import LoadingBar from "react-redux-loading";
 import Header from "./components/Header";
+import Poll from "./components/Poll";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ function App() {
 
   const authedUser = useSelector(
     (state) => ({
-      authUserSet: state.authedUser === null,
+      noAuthedUser: state.authedUser === null,
     }),
     shallowEqual
   );
@@ -28,28 +29,24 @@ function App() {
   return (
     <Router>
       <Fragment>
-        {authedUser.authUserSet ? (
+        <LoadingBar
+          style={{
+            backgroundColor: "green",
+            height: "20px",
+            position: "fixed",
+            top: "0",
+          }}
+        />
+        {authedUser.noAuthedUser ? (
           <Route render={() => <Login />} />
         ) : (
-          <Fragment>
-            <LoadingBar
-              style={{
-                backgroundColor: "green",
-                height: "5px",
-                position: "fixed",
-                top: "0",
-              }}
-            />
-
-            {authedUser.authUserSet === true ? null : (
-              <div>
-                <Header />
-                <Route exact path="/" component={Home} />
-                <Route path="/add" component={NewQuestion} />
-                <Route path="/leaderboard" component={Leaderboard} />
-              </div>
-            )}
-          </Fragment>
+          <div>
+            <Header />
+            <Route exact path="/" component={Home} />
+            <Route path="/questions/:id" component={Poll} />
+            <Route path="/add" component={NewQuestion} />
+            <Route path="/leaderboard" component={Leaderboard} />
+          </div>
         )}
       </Fragment>
     </Router>

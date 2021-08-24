@@ -77,7 +77,7 @@ const Login = () => {
       </Form>
       <Card.Footer className="mb-2 text-muted">
         <a href="https://www.freepik.com/vectors/question">
-          Image sourced from freepik
+          Images sourced from freepik
         </a>
       </Card.Footer>
     </Card>

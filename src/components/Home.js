@@ -23,8 +23,6 @@ const Home = () => {
     shallowEqual
   );
 
-  //console.log(polls.answered);
-  //console.log(polls.unanswered);
   console.log("rendering home");
 
   return (
@@ -39,12 +37,12 @@ const Home = () => {
     >
       <Tab eventKey="unanswered" title="Unanswered">
       {polls.unanswered.map(poll => (
-            <PollCardList id={poll.id} key={poll.id} />
+            <PollCardList answered={false} id={poll.id} key={poll.id} />
           ))}
       </Tab>
       <Tab className="text-center" eventKey="answered" title="Answered">
       {polls.answered.map(poll => (
-            <PollCardList id={poll.id} key={poll.id} />
+            <PollCardList answered={true} id={poll.id} key={poll.id} />
           ))}
       </Tab>
     </Tabs>

@@ -23,8 +23,6 @@ const Home = () => {
     shallowEqual
   );
 
-  console.log("rendering home");
-
   return (
     <div className='text-center'>
     <Tabs

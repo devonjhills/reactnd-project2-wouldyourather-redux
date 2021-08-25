@@ -12,7 +12,7 @@ const Header = () => {
   const history = useHistory();
 
   const handleLogout = () => {
-    history.push("")
+    history.push("/");
     dispatch(setAuthedUser(null));
   };
 
@@ -31,31 +31,39 @@ const Header = () => {
       <Navbar.Toggle />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link as={Link} to="/">
-            <Button variant="light">Home</Button>
-          </Nav.Link>
-          <Nav.Link as={Link} to="/add">
-            <Button variant="light">New Question</Button>
-          </Nav.Link>
-          <Nav.Link as={Link} to="/leaderboard">
-            <Button variant="light">Leaderboard</Button>
-          </Nav.Link>
-        </Nav>
-        <Nav>
-          <Navbar.Text>
-            Hello, {users[authedUser].name}
-            <img
-              className="userimg"
-              src={users[authedUser].avatarURL}
-              alt="User Avatar"
-            />
-          </Navbar.Text>
-          <Navbar.Text>
-            <Button variant="outline-danger" size="sm" onClick={handleLogout}>
-              Logout
+          <Nav.Link as={Link} to="/home" disabled={authedUser === null}>
+            <Button variant="outline-light" disabled={authedUser === null}>
+              Home
             </Button>
-          </Navbar.Text>
+          </Nav.Link>
+          <Nav.Link as={Link} to="/add" disabled={authedUser === null}>
+            <Button variant="outline-light" disabled={authedUser === null}>
+              New Question
+            </Button>
+          </Nav.Link>
+          <Nav.Link as={Link} to="/leaderboard" disabled={authedUser === null}>
+            <Button variant="outline-light" disabled={authedUser === null}>
+              Leaderboard
+            </Button>
+          </Nav.Link>
         </Nav>
+        {authedUser && (
+          <Nav>
+            <Navbar.Text>
+              Hello, {users[authedUser].name}
+              <img
+                className="userimg"
+                src={users[authedUser].avatarURL}
+                alt="User Avatar"
+              />
+            </Navbar.Text>
+            <Navbar.Text>
+              <Button variant="outline-danger" size="sm" onClick={handleLogout}>
+                Logout
+              </Button>
+            </Navbar.Text>
+          </Nav>
+        )}
       </Navbar.Collapse>
     </Navbar>
   );

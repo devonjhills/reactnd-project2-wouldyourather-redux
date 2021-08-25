@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { handleInitialData } from "./actions/shared";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -34,18 +34,20 @@ function App() {
             backgroundColor: "green",
             height: "20px",
             position: "fixed",
-            top: "0",
+            top: "70px",
           }}
         />
+        <Header />
         {authedUser.noAuthedUser ? (
           <Route render={() => <Login />} />
         ) : (
           <div>
-            <Header />
-            <Route exact path="/" component={Home} />
-            <Route path="/questions/:id" component={Poll} />
-            <Route path="/add" component={NewQuestion} />
-            <Route path="/leaderboard" component={Leaderboard} />
+            <Switch>
+              <Route path="/home" component={Home} />
+              <Route path="/questions/:id" component={Poll} />
+              <Route path="/add" component={NewQuestion} />
+              <Route path="/leaderboard" component={Leaderboard} />
+            </Switch>
           </div>
         )}
       </Fragment>

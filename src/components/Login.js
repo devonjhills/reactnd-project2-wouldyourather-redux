@@ -8,27 +8,26 @@ import {
   ListGroupItem,
 } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { setAuthedUser } from "../actions/authedUser";
 
 const Login = () => {
   const users = useSelector((state) => state.users);
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [selectedUser, setSelectedUser] = useState("");
 
   const onFormSubmit = (event) => {
     event.preventDefault();
     dispatch(setAuthedUser(selectedUser));
+    history.push("/home");
   };
 
   const onFormChange = (event) => {
     setSelectedUser(event.target.value);
   };
-
-  const disableSubmit = (selectedUser === "" ? true : false);
-
-  console.log('rendering login');
 
   return (
     <Card
@@ -68,7 +67,7 @@ const Login = () => {
           </ListGroupItem>
           <ListGroupItem>
             <div className="d-grid gap-2">
-              <Button variant="success" type="submit" disabled={disableSubmit}>
+              <Button variant="success" type="submit" disabled={selectedUser === "" ? true : false}>
                 Sign In
               </Button>
             </div>

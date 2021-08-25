@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Would You Rather Project: Redux
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Final Project for the Udacity React Nanodegree program.
+
+[<< Click here to see a live version of this App >>](https://devon-reactnd-wouldyourather.herokuapp.com/)
 
 ## Available Scripts
 

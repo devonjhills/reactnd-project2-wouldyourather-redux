@@ -12,8 +12,8 @@ const PollCardList = (props) => {
 
   const [redirect, setRedirect] = useState(false);
 
-  const handleClick = (e) => {
-    e.preventDefault();
+  const handleClick = (event) => {
+    event.preventDefault();
     setRedirect(true);
   };
 
@@ -26,7 +26,7 @@ const PollCardList = (props) => {
       className="text-center"
       style={{ width: "40%", margin: "auto", marginBottom: "5px" }}
     >
-      <Card border-variant="dark" bg-variant="dark" text="dark" border="dark">
+      <Card border="dark" bg="light" text="dark">
         <Card.Header style={{ textAlign: "left" }}>
           <Card.Title>
           {author.name} {props.answered ? "asked:" : "asks:"}
@@ -43,7 +43,7 @@ const PollCardList = (props) => {
             }}
             src={author && author.avatarURL}
             alt="user avatar"
-          ></Card.Img>
+          />
           <Card.Body>
             <Card.Title style={{ textAlign: "center" }}>
               Would you rather

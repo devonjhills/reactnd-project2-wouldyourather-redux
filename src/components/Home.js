@@ -40,7 +40,7 @@ const Home = () => {
             <PollCardList answered={false} id={poll.id} key={poll.id} />
           ))}
       </Tab>
-      <Tab className="text-center" eventKey="answered" title="Answered">
+      <Tab eventKey="answered" title="Answered">
       {polls.answered.map(poll => (
             <PollCardList answered={true} id={poll.id} key={poll.id} />
           ))}

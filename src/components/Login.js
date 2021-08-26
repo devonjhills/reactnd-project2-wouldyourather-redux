@@ -22,7 +22,6 @@ const Login = () => {
   const onFormSubmit = (event) => {
     event.preventDefault();
     dispatch(setAuthedUser(selectedUser));
-    history.push("/home");
   };
 
   const onFormChange = (event) => {

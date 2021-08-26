@@ -1,8 +1,5 @@
-import {
-  ADD_ANSWER,
-  ADD_QUESTION,
-  RECEIVE_QUESTIONS,
-} from "../actions/questions";
+import { ADD_ANSWER, ADD_QUESTION, RECEIVE_QUESTIONS } from "../actions/types";
+
 
 const questions = (state = {}, action) => {
   switch (action.type) {

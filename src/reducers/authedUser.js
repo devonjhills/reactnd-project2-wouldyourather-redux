@@ -1,4 +1,4 @@
-import { SET_AUTHED_USER } from "../actions/authedUser";
+import { SET_AUTHED_USER } from "../actions/types";
 
 const authedUser = (state = null, action) => {
   switch (action.type) {

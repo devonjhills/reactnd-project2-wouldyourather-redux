@@ -43,7 +43,7 @@ function App() {
         ) : (
           <div>
             <Switch>
-              <Route path="/home" component={Home} />
+              <Route exact path="/" component={Home} />
               <Route path="/questions/:id" component={Poll} />
               <Route path="/add" component={NewQuestion} />
               <Route path="/leaderboard" component={Leaderboard} />

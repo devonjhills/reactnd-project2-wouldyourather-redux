@@ -31,7 +31,7 @@ const Header = () => {
       <Navbar.Toggle />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link as={Link} to="/home" disabled={authedUser === null}>
+          <Nav.Link as={Link} to="/" disabled={authedUser === null}>
             <Button variant="outline-light" disabled={authedUser === null}>
               Home
             </Button>

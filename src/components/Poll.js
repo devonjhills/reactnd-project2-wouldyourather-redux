@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import { useSelector, shallowEqual } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import PollQuestion from "./PollQuestion";
 import PollResults from "./PollResults";
 
@@ -11,18 +11,22 @@ const Poll = () => {
   const authedUser = useSelector((state) => state.authedUser);
 
   const urlId = useParams();
-
   const question = questions[urlId.id];
-  const user = users[question.author];
-  const currentUser = users[authedUser];
 
+  const user = question !== undefined && users[question.author];
+  const currentUser = question !== undefined && users[authedUser];
 
   const answered = useSelector(
-    () => ({
-      isAnswered: Object.keys(currentUser.answers).includes(question.id),
-    }),
+    () =>
+      question !== undefined && {
+        isAnswered: Object.keys(currentUser.answers).includes(question.id),
+      },
     shallowEqual
   );
+
+  if (question === undefined) {
+    return <Redirect to="/questions/fourohfour" />;
+  }
 
   return (
     <div className="text-center" style={{ width: "40%", margin: "auto" }}>
@@ -48,7 +52,11 @@ const Poll = () => {
             <Card.Title style={{ textAlign: "left" }}>
               Would you rather ...
             </Card.Title>
-            {answered.isAnswered ? <PollResults qid={urlId.id} /> : <PollQuestion qid={urlId.id} />}
+            {answered.isAnswered ? (
+              <PollResults qid={urlId.id} />
+            ) : (
+              <PollQuestion qid={urlId.id} />
+            )}
           </Card.Body>
         </div>
       </Card>

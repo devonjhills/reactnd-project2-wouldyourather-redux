@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useLocation } from "react-router-dom";
 
 const PollCardList = (props) => {
   const questions = useSelector((state) => state.questions);
@@ -17,8 +17,10 @@ const PollCardList = (props) => {
     setRedirect(true);
   };
 
+  const { pathname } = useLocation();
+
   if (redirect === true) {
-    return <Redirect push to={`/questions/${props.id}`} />;
+    return <Redirect pathname={pathname} push to={`/questions/${props.id}`} />;
   }
 
   return (

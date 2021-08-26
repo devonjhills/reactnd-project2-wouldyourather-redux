@@ -8,14 +8,12 @@ import {
   ListGroupItem,
 } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { setAuthedUser } from "../actions/authedUser";
 
 const Login = () => {
   const users = useSelector((state) => state.users);
 
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [selectedUser, setSelectedUser] = useState("");
 
@@ -56,7 +54,7 @@ const Login = () => {
                 </option>
                 {Object.values(users).map((user) => {
                   return (
-                    <option key={user.id} value={user.id} >
+                    <option key={user.id} value={user.id}>
                       {user.name}
                     </option>
                   );
@@ -66,7 +64,11 @@ const Login = () => {
           </ListGroupItem>
           <ListGroupItem>
             <div className="d-grid gap-2">
-              <Button variant="success" type="submit" disabled={selectedUser === "" ? true : false}>
+              <Button
+                variant="success"
+                type="submit"
+                disabled={selectedUser === "" ? true : false}
+              >
                 Sign In
               </Button>
             </div>
@@ -75,7 +77,7 @@ const Login = () => {
       </Form>
       <Card.Footer className="mb-2 text-muted">
         <a href="https://www.freepik.com/vectors/question">
-          Images sourced from freepik
+          Question vector created by freepik - www.freepik.com
         </a>
       </Card.Footer>
     </Card>

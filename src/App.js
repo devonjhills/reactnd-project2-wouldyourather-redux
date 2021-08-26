@@ -11,6 +11,7 @@ import NewQuestion from "./components/NewQuestion";
 import LoadingBar from "react-redux-loading";
 import Header from "./components/Header";
 import Poll from "./components/Poll";
+import FourOhFour from "./components/FourOhFour";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,9 +45,11 @@ function App() {
           <div>
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route path="/questions/fourohfour" component={FourOhFour} />
               <Route path="/questions/:id" component={Poll} />
               <Route path="/add" component={NewQuestion} />
               <Route path="/leaderboard" component={Leaderboard} />
+              <Route path="*" component={FourOhFour} />
             </Switch>
           </div>
         )}

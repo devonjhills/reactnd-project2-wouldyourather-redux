@@ -6,7 +6,10 @@ Final Project for the [Udacity React Nanodegree program](https://www.udacity.com
 
 This project is built with React and utilizes Redux for improving the predictability of the application’s state; establishing strict rules for getting, listening, and updating the store; and identifying what state should live inside of Redux and what state should live inside of React components.
 
-[**Click here to view a live version of this App**](https://devon-reactnd-wouldyourather.herokuapp.com/)
+## Live app
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4931e052-ac50-4b82-a6e1-d613c76192a5/deploy-status)](https://app.netlify.com/sites/dhills-udacity-reactnd-wouldyourather/deploys)
+
+Live version of this App deployed via Netlify here: https://dhills-udacity-reactnd-wouldyourather.netlify.app/
 
 ## Install Instructions
 
